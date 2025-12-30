@@ -1,0 +1,10 @@
+torch>=2.0.0
+GitPython==3.0.5
+gitdb2==2.0.6
+pyscreeze>=0.1.28
+PyQt5>=5.15.0
+PyQt5-sip>=12.13.0
+Pillow>=5.2.0
+opencv-python
+rlcard
+ultralytics
