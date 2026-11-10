@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+    branches: [master, main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Syntax & Core Engine Unit Tests (${{ matrix.os }}, Python ${{ matrix.python-version }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python-version: ["3.10", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install core test dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install numpy opencv-python-headless
+
+      - name: Byte-compile & CLI region validator check
+        run: |
+          python -m compileall -q main.py MainWindowUI.py pos_debug.py card_tracker.py douzero tests
+          python pos_debug.py --validate
+
+      - name: Run unit tests
+        run: python -m unittest discover -s tests -v
