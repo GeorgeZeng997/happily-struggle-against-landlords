@@ -1,44 +1,84 @@
-# Happily Struggle Against Landlords
+# Happily Struggle Against Landlords (DouZero + YOLOv8 AI Assistant)
 
-## Overview
-This project provides a DouDizhu assistant with YOLOv8-based card recognition.
-It performs real-time detection on fixed screen regions and drives the AI helper.
+A real-time **DouDizhu** desktop assistant combining **YOLOv8** visual card recognition (`weights/best.pt`) with **DouZero** deep reinforcement learning agents (`baselines/douzero_WP/`) inside an always-on-top **PyQt5** overlay.
 
-## Changes
-- Replaced template matching with YOLOv8 `best.pt` (weights: `weights/best.pt`)
-- Expanded played-card regions to 600x600 with continuous detection
-- UI shows live recognition results and YOLO inference latency
-- Added debug mode with a mouse-following detection window
-- Added region calibration with mouse boxing or manual input
-- Calibration data stored at `config/regions.json`
+---
+
+## Key Features
+
+- **Real-Time YOLOv8 Card Recognition**: Continuously detects player hand cards, left/right played cards, and the 3 bottom landlord cards with live inference latency telemetry (`ms`).
+- **DouZero Win-Rate & Move Advisor**: Evaluates legal actions via pretrained `landlord`, `landlord_up`, and `landlord_down` deep neural networks, displaying recommended moves and estimated win probability (`%`).
+- **Live Unseen Card Counter**: Tracks all 54 cards across turns and surfaces remaining high cards (`D / X / 2 / A / K`) and full unseen rank counts in console and UI tooltips.
+- **Interactive Region Calibration & Profile Management**:
+  - Two-click on-screen bounding-box calibration or manual `x,y,w,h` entry.
+  - One-click **1080p Defaults Reset**, **Import Profile**, and **Export Profile** (`config/regions.json`).
+  - Mouse-following live YOLO debug window (**Debug Mode**).
+- **CLI Region Overlay & Validator (`pos_debug.py`)**: Inspect, validate, and render color-coded capture region overlays onto saved screenshots or live desktop captures.
+
+---
 
 ## Training Results
-![results](train_results/results.png)
-![confusion](train_results/confusion_matrix.png)
+
+![Training Metrics](train_results/results.png)
+![Confusion Matrix](train_results/confusion_matrix.png)
+
+---
+
+## Installation
+
+```bash
+python -m venv .venv
+.\.venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+---
 
 ## Usage
-1. Run the game in windowed mode at 1920x1080.
-2. Start the app with `python main.py`.
-3. Click **Start** after your hand, bottom cards, and landlord role appear.
-4. Follow the AI suggestion in-game manually.
-5. Use **Stop** to end a round if recognition fails.
-6. Use **Calibrate** to adjust regions if needed.
 
-## Recognition Breakdown
-YOLOv8-based detection:
-- My hand cards
-- Left/Right played cards
-- Bottom (three landlord cards)
+### 1. Desktop Assistant (`main.py`)
 
-Template matching (original assets in `pics/`):
-- Landlord flag (`pics/landlord_words.png`)
-- Pass indicator (`pics/pass.png`)
-- White background marker (`pics/white.png`)
+1. Run the game in windowed or borderless mode (`1920x1080` recommended).
+2. Launch the PyQt5 assistant:
+   ```bash
+   python main.py
+   ```
+3. Verify regions using **Calibrate** (or press `q` to close the live Region Preview window).
+4. Once cards are dealt and the Landlord badge appears, click **Start** to receive real-time DouZero move suggestions and win-rate estimates.
+5. Click **Stop** at any time to abort the current round cleanly.
 
-## Notes
-- The app relies on pixel-accurate regions. Calibrate if the window position changes.
-- Visual effects during rocket (double jokers) can cause partial recognition.
+### 2. CLI Region Validator & Overlay Tool (`pos_debug.py`)
 
-## A lighthearted note
-“Struggle against landlords” used to be a historical phrase, but on the card table it is just a game.
-We only “struggle” with cards: one round, one laugh, and another shuffle.
+```bash
+# Validate config/regions.json against 1920x1080 bounds (JSON output)
+python pos_debug.py --validate
+
+# Render labeled capture boxes onto a saved screenshot
+python pos_debug.py --image game_screen.png --output annotated_regions.png
+```
+
+---
+
+## Repository Structure
+
+- `main.py` / `MainWindowUI.py` / `MainWindow.ui`: PyQt5 desktop GUI, YOLOv8 inference loop, and interactive calibration controller.
+- `card_tracker.py`: Card rank encoding, YOLO class mapping, unseen deck counter, and region validation helpers.
+- `pos_debug.py`: Headless/interactive CLI region overlay visualizer and bounds validator.
+- `douzero/`: DouZero game environment, legal move generator/detector/selector, and neural network evaluation wrapper.
+- `weights/best.pt`: Trained YOLOv8 card-detection weights.
+- `baselines/douzero_WP/`: Pretrained DouZero win-probability checkpoints (`landlord.ckpt`, `landlord_up.ckpt`, `landlord_down.ckpt`).
+- `config/regions.json`: Persisted screen-capture region coordinates.
+
+---
+
+## Running Tests
+
+```bash
+python -m unittest discover -s tests -v
+```
+
+---
+
+## A Lighthearted Note
+
+"Struggle against landlords" used to be a historical phrase, and at the card table it is simply a classic strategy game: one round, one laugh, and another shuffle.

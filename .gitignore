@@ -1,4 +1,20 @@
-.idea
-__pycache__
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# IDE / OS metadata
+.idea/
+.vscode/
 .DS_Store
-*.pyc
+Thumbs.db
+
+# Temporary debug / test artifacts
+*.log
+annotated_*.png
+debug_capture_*.png

@@ -20,7 +20,7 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>DouZero for 欢乐斗地主</string>
+   <string>DouZero AI Assistant</string>
   </property>
   <widget class="QLabel" name="WinRate">
    <property name="geometry">
@@ -33,11 +33,11 @@
    </property>
    <property name="font">
     <font>
-     <pointsize>14</pointsize>
+     <pointsize>12</pointsize>
     </font>
    </property>
    <property name="text">
-    <string>胜率：--%</string>
+    <string>Win Rate: --%</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -46,16 +46,16 @@
   <widget class="QPushButton" name="InitCard">
    <property name="geometry">
     <rect>
-     <x>60</x>
+     <x>300</x>
      <y>330</y>
-     <width>121</width>
-     <height>41</height>
+     <width>120</width>
+     <height>28</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>Arial</family>
-     <pointsize>14</pointsize>
+     <pointsize>11</pointsize>
      <weight>75</weight>
      <bold>true</bold>
     </font>
@@ -64,7 +64,7 @@
     <string notr="true"/>
    </property>
    <property name="text">
-    <string>开始</string>
+    <string>Start</string>
    </property>
   </widget>
   <widget class="QLabel" name="UserHandCards">
@@ -72,17 +72,17 @@
     <rect>
      <x>10</x>
      <y>260</y>
-     <width>421</width>
+     <width>280</width>
      <height>41</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>14</pointsize>
+     <pointsize>12</pointsize>
     </font>
    </property>
    <property name="text">
-    <string>手牌</string>
+    <string>Hand Cards</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -114,11 +114,11 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>14</pointsize>
+      <pointsize>12</pointsize>
      </font>
     </property>
     <property name="text">
-     <string>上家出牌区域</string>
+     <string>Left Played</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
@@ -136,7 +136,7 @@
    </property>
    <property name="font">
     <font>
-     <pointsize>16</pointsize>
+     <pointsize>14</pointsize>
     </font>
    </property>
    <property name="frameShape">
@@ -156,11 +156,11 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>14</pointsize>
+      <pointsize>12</pointsize>
      </font>
     </property>
     <property name="text">
-     <string>下家出牌区域</string>
+     <string>Right Played</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
@@ -193,11 +193,11 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>14</pointsize>
+      <pointsize>12</pointsize>
      </font>
     </property>
     <property name="text">
-     <string>AI出牌区域</string>
+     <string>AI Suggestion</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
@@ -207,19 +207,19 @@
   <widget class="QLabel" name="ThreeLandlordCards">
    <property name="geometry">
     <rect>
-     <x>140</x>
+     <x>110</x>
      <y>10</y>
-     <width>161</width>
+     <width>221</width>
      <height>41</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>16</pointsize>
+     <pointsize>14</pointsize>
     </font>
    </property>
    <property name="text">
-    <string>三张底牌</string>
+    <string>Bottom Cards</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -228,16 +228,16 @@
   <widget class="QPushButton" name="Stop">
    <property name="geometry">
     <rect>
-     <x>260</x>
-     <y>330</y>
-     <width>111</width>
-     <height>41</height>
+     <x>300</x>
+     <y>360</y>
+     <width>120</width>
+     <height>28</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>Arial</family>
-     <pointsize>14</pointsize>
+     <pointsize>11</pointsize>
      <weight>75</weight>
      <bold>true</bold>
     </font>
@@ -246,7 +246,7 @@
     <string notr="true"/>
    </property>
    <property name="text">
-    <string>停止</string>
+    <string>Stop</string>
    </property>
   </widget>
  </widget>
